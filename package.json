@@ -6,12 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
-    "build": "npm install && cd frontend && npm run build",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "start": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "stripe": "^15.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.2"
   }
 }

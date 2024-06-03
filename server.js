@@ -19,6 +19,10 @@ app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 
+// For demonstration purposes, you can also use GET for testing.
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
 
 app.post("/checkout", async (req, res) => {
     console.log("request datasss", req.body)
@@ -69,19 +73,7 @@ app.post("/checkout", async (req, res) => {
     }
 });
 
-// GET method to retrieve checkout session details
-app.get("/checkout/:sessionId", async (req, res) => {
-    const sessionId = req.params.sessionId;
-
-    try {
-        const session = await stripe.checkout.sessions.retrieve(sessionId);
-        res.send(session);
-    } catch (error) {
-        console.error('Error retrieving Stripe session:', error);
-        res.status(500).send({ error: error.message });
-    }
-});
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
