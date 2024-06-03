@@ -18,6 +18,7 @@ const app = express();
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 // For demonstration purposes, you can also use GET for testing.
 app.get('/', (req, res) => {
