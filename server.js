@@ -20,7 +20,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 
-app.post("https://react-stripe.onrender.com/checkout", async (req, res) => {
+app.post("/checkout", async (req, res) => {
     console.log("request datasss", req.body)
     const items = req.body.items;
     let lineItems = [];
@@ -65,6 +65,19 @@ app.post("https://react-stripe.onrender.com/checkout", async (req, res) => {
 
     } catch(error) {
         console.error('Error creating Stripe session:', error);
+        res.status(500).send({ error: error.message });
+    }
+});
+
+// GET method to retrieve checkout session details
+app.get("/checkout/:sessionId", async (req, res) => {
+    const sessionId = req.params.sessionId;
+
+    try {
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+        res.send(session);
+    } catch (error) {
+        console.error('Error retrieving Stripe session:', error);
         res.status(500).send({ error: error.message });
     }
 });
