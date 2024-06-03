@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js",
+    "server": "nodemon server.cjs",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "node server.js"
+    "start": "node server.cjs"
   },
   "dependencies": {
     "cors": "^2.8.5",
