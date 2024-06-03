@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.post("/checkout", async (req, res) => {
-    console.log("request datasss", req.body)
+    console.log("request datas", req.body)
     const items = req.body.items;
     let lineItems = [];
 

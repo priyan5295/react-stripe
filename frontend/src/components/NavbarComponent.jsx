@@ -15,7 +15,7 @@ const NavbarComponent = () => {
 
   const checkout = async () => {
     try {
-      const response = await fetch('https://react-stripe.onrender.com/checkout', {
+      const response = await fetch('/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
