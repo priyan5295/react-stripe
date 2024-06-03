@@ -20,7 +20,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 
-app.post("/checkout", async (req, res) => {
+app.post("https://react-stripe.onrender.com/checkout", async (req, res) => {
     console.log("request datasss", req.body)
     const items = req.body.items;
     let lineItems = [];
@@ -70,4 +70,5 @@ app.post("/checkout", async (req, res) => {
 });
 
 // Start the server
-app.listen(3000, () => console.log('Listening on port 3000'));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
