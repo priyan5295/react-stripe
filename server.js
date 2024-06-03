@@ -11,6 +11,7 @@
 import express from 'express';
 import cors from 'cors';
 import stripeModule from 'stripe';
+import path from 'path';
 
 const stripe = stripeModule('sk_test_51PMQzE03DZVnzjSRtSxkdtdRcpMYFGqyz4eXcuUklo1GZmybGU00a8R6SFyxXNJF5CwfiNN1yfGmvyCNEnRZh1dQ00vSM84Vmh');
 
@@ -18,6 +19,7 @@ const app = express();
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
+
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 // For demonstration purposes, you can also use GET for testing.
