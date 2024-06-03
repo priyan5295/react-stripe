@@ -41,7 +41,7 @@ const NavbarComponent = () => {
   return (
     <>
     <Navbar>
-        <Navbar.Brand href="/" className='fw-bold fs-3'>
+        <Navbar.Brand href="https://react-stripe.onrender.com/" className='fw-bold fs-3'>
           Priyan
         </Navbar.Brand>
         <Navbar.Toggle />
