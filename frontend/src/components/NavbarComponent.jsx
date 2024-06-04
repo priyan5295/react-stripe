@@ -44,10 +44,7 @@ const NavbarComponent = () => {
   
       const data = await response.json();
       if (data.url) {
-        setCurrentPage('Success');
         window.location.assign(data.url); // forward user to stripe
-      } else {
-        
       }
     } catch (error) {
       console.error('Error:', error);
