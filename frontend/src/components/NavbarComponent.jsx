@@ -3,7 +3,6 @@ import {Button, Container, Navbar, Modal, Image} from 'react-bootstrap'
 import { CartContent } from '../CartContent'
 import CartProduct from './CartProduct'
 import NoItemImage from '../assets/empty-cart.svg'
-import { useNavigate } from 'react-router-dom'
 
 const NavbarComponent = () => {
 
@@ -14,8 +13,6 @@ const NavbarComponent = () => {
   const[show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
-
-  const navigate = useNavigate()
 
   const handlePurchase = async () => {
     try {
@@ -33,12 +30,6 @@ const NavbarComponent = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ items: cart.items })
-      }).then(function(response){
-        console.log(response)
-        navigate('/success')
-      }).catch(function(response){
-        console.log(response)
-        navigate('/cancel')
       })
   
       if (!response.ok) {
@@ -58,7 +49,7 @@ const NavbarComponent = () => {
         setCurrentPage('Success');
         window.location.assign(data.url); // forward user to stripe
       } else {
-
+        
       }
     } catch (error) {
       console.error('Error:', error);
