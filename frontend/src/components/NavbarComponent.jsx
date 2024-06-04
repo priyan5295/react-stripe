@@ -3,15 +3,22 @@ import {Button, Container, Navbar, Modal, Image} from 'react-bootstrap'
 import { CartContent } from '../CartContent'
 import CartProduct from './CartProduct'
 import NoItemImage from '../assets/empty-cart.svg'
+import { useNavigate } from 'react-router-dom'
 
 const NavbarComponent = () => {
 
-    
+  const [currentPage, setCurrentPage] = useState('Cart');
+  const [purchaseResult, setPurchaseResult] = useState(null);
+
   const cart = useContext(CartContent)
 
   const[show, setShow] = useState(false)
+  const navigate = useNavigate();
   const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
+  const handleClose = () => {
+    setShow(false)
+    setPurchaseResult(null)
+  }
 
   const handlePurchase = async () => {
     try {
@@ -20,6 +27,7 @@ const NavbarComponent = () => {
         id: item.id,
         quantity: item.quantity
     }));
+
     console.log('Formatted Cart items:', JSON.stringify(formattedItems, null, 2));
 
       const response = await fetch('https://react-stripe.onrender.com/checkout', {
@@ -28,7 +36,7 @@ const NavbarComponent = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ items: cart.items })
-      });
+      })
   
       if (!response.ok) {
         const contentType = response.headers.get('Content-Type');
@@ -44,7 +52,10 @@ const NavbarComponent = () => {
   
       const data = await response.json();
       if (data.url) {
+        setCurrentPage('Success');
         window.location.assign(data.url); // forward user to stripe
+      } else {
+        setCurrentPage('Cancel');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -52,6 +63,10 @@ const NavbarComponent = () => {
   };
 
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0)
+
+  if(purchaseResult === 'success') {
+    navigate('/success')
+  }
 
   return (
     <>
