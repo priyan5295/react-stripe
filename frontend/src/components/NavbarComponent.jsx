@@ -18,7 +18,7 @@ const NavbarComponent = () => {
 
       console.log('Cart items:', JSON.stringify(cart.items, null, 2));
 
-      const response = await fetch('https://react-stripe.onrender.com/checkout', {
+      const response = await fetch('/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
