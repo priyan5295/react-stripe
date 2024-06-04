@@ -13,10 +13,10 @@ const NavbarComponent = () => {
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
 
-  const checkout = async () => {
+  const handlePurchase = async () => {
     try {
 
-      console.log('Cart items:', cart.items);
+      console.log('Cart items:', JSON.stringify(cart.items, null, 2));
 
       const response = await fetch('https://react-stripe.onrender.com/checkout', {
         method: 'POST',
@@ -27,7 +27,6 @@ const NavbarComponent = () => {
       });
   
       if (!response.ok) {
-
         const errorData = await response.json();
         console.error(`HTTP error! status: ${response.status}`, errorData);
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -68,7 +67,7 @@ const NavbarComponent = () => {
           ))}
             <h1>Total : ${cart.getTotalCost().toFixed(2)}</h1>
 
-            <Button variant='success' onClick={checkout}>
+            <Button variant='success' onClick={handlePurchase}>
                 Purchase Items!
             </Button>
 
