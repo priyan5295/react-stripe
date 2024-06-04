@@ -15,7 +15,10 @@ const NavbarComponent = () => {
 
   const checkout = async () => {
     try {
-      const response = await fetch('/checkout', {
+
+      console.log('Cart items:', cart.items);
+
+      const response = await fetch('https://react-stripe.onrender.com/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -24,6 +27,9 @@ const NavbarComponent = () => {
       });
   
       if (!response.ok) {
+
+        const errorData = await response.json();
+        console.error(`HTTP error! status: ${response.status}`, errorData);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
   
