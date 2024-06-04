@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-app.post("/checkout", async (req, res) => {
+app.post("https://react-stripe.onrender.com/checkout", async (req, res) => {
     console.log("request datas", req.body)
     const items = req.body.items;
     let lineItems = [];
