@@ -10,13 +10,20 @@ const ProductCart = (props) => { // props.product is the product we are selling
     const productQuantity = cart.getProductQuantity(product.id)
     // console.log("each card items", cart.items)
 
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currency,
+        }).format(price)
+    }
+
   return (
     <div className='pt-5'>
     <Card>
         <Card.Body>
             <Image src={product.image}  fluid/>
             <Card.Title>{product.title}</Card.Title>
-            <Card.Text>Price : $ {product.price}</Card.Text>
+            <Card.Text>Price : $ {formatPrice(product.price)}</Card.Text>
             { productQuantity > 0 ?
             <>
                 <Form as={Row}>
