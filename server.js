@@ -80,6 +80,10 @@ app.post("/checkout", async (req, res) => {
     }
 });
 
+app.get("*",(req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
+})
+
 // Start the server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
