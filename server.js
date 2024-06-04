@@ -37,7 +37,7 @@ app.post("https://react-stripe.onrender.com/checkout", async (req, res) => {
     let lineItems = [];
 
     //check if items exist and are in the correct format
-    if(!items || Array.isArray(items)){
+    if(!items || !Array.isArray(items)){
         return res.status(400).send({ error: 'Invalid items format'});
     }
 
