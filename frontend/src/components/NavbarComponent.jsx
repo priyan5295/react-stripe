@@ -27,10 +27,16 @@ const NavbarComponent = () => {
       });
   
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error(`HTTP error! status: ${response.status}`, errorData);
+        const contentType = response.headers.get('Content-Type');
+        if (contentType && contentType.includes('application/json')) {
+            const errorData = await response.json();
+            console.error(`HTTP error! status: ${response.status}`, errorData);
+        } else {
+            const errorText = await response.text();
+            console.error(`HTTP error! status: ${response.status}`, errorText);
+        }
         throw new Error(`HTTP error! status: ${response.status}`);
-      }
+    }
   
       const data = await response.json();
       if (data.url) {

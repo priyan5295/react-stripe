@@ -31,14 +31,14 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-app.post("https://react-stripe.onrender.com/checkout", async (req, res) => {
+app.post("/checkout", async (req, res) => {
     console.log("request datas", req.body)
     const items = req.body.items;
     let lineItems = [];
 
     //check if items exist and are in the correct format
     if(!items || !Array.isArray(items)){
-        return res.status(400).send({ error: 'Invalid items format'});
+        return res.status(400).json({ error: 'Invalid items format'});
     }
 
     // construct line items for Stripe
@@ -49,7 +49,7 @@ app.post("https://react-stripe.onrender.com/checkout", async (req, res) => {
                 quantity: item.quantity
             });
         } else {
-            return res.status(400).send({error: 'Item must have id and quantity'})
+            return res.status(400).json({error: 'Item must have id and quantity'})
         }        
     });
 
@@ -70,13 +70,13 @@ app.post("https://react-stripe.onrender.com/checkout", async (req, res) => {
 
 
         // Send the session URL as the response
-        res.send(JSON.stringify({
+        res.json(JSON.stringify({
             url: session.url
         }));
 
     } catch(error) {
         console.error('Error creating Stripe session:', error);
-        res.status(500).send({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 });
 
