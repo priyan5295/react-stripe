@@ -64,8 +64,8 @@ app.post("/checkout", async (req, res) => {
             payment_method_types: ['card'],
             line_items : lineItems,
             mode: 'payment',
-            success_url: "https://react-stripe.onrender.com/success",
-            cancel_url: "https://react-stripe.onrender.com/cancel"
+            success_url: "/success",
+            cancel_url: "/cancel"
         });
 
         console.log('session cretaed', session)

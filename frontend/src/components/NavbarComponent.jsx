@@ -43,6 +43,7 @@ const NavbarComponent = () => {
     }
   
       const data = await response.json();
+      console.log('success', data)
       if (data.url) {
         window.location.assign(data.url); // forward user to stripe
       }
