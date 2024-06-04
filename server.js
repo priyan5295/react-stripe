@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 
-console.log({__dirname})
+console.log({ __dirname })
 
 app.use(express.static(path.join(__dirname, 'frontend/dist'))).on('error', (err) => {
     console.error('Error serving static files:', err);
@@ -34,26 +34,49 @@ app.get('/', (req, res) => {
 });
 
 app.post("/checkout", async (req, res) => {
+
     console.log("request datas", req.body)
+
     const items = req.body.items;
-    let lineItems = [];
+
+    const uniqueCurrencies = new Set(items.map(item => item.currency))
+    if (uniqueCurrencies.size > 1) {
+        return res.status(400).json({
+            error: 'All items must have the same currency',
+            details: Array.from(uniqueCurrencies)
+        });
+    }
+
+
+
+    // let lineItems = [];
 
     //check if items exist and are in the correct format
-    if(!items || !Array.isArray(items)){
-        return res.status(400).json({ error: 'Invalid items format'});
+    if (!items || !Array.isArray(items)) {
+        return res.status(400).json({ error: 'Invalid items format' });
     }
 
     // construct line items for Stripe
-    items.forEach((item) => {
-        if(item.id && item.quantity){
-            lineItems.push({
-                price: item.id,
-                quantity: item.quantity
-            });
-        } else {
-            return res.status(400).json({error: 'Item must have id and quantity'})
-        }        
-    });
+    const lineItems = [];
+    for (const item of items) {
+        if (!item.id || !item.quantity) {
+            return res.status(400).json({ error: 'Item must have id and quantity' });
+        }
+        lineItems.push({
+            price: item.id,
+            quantity: item.quantity
+        });
+    }
+    // items.forEach((item) => {
+    //     if(item.id && item.quantity){
+    //         lineItems.push({
+    //             price: item.id,
+    //             quantity: item.quantity
+    //         });
+    //     } else {
+    //         return res.status(400).json({error: 'Item must have id and quantity'})
+    //     }        
+    // });
 
     console.log('line-items', lineItems);
 
@@ -62,7 +85,7 @@ app.post("/checkout", async (req, res) => {
         // Create a checkout session
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            line_items : lineItems,
+            line_items: lineItems,
             mode: 'payment',
             success_url: "https://react-stripe.onrender.com/success",
             cancel_url: "https://react-stripe.onrender.com/cancel"
@@ -74,13 +97,13 @@ app.post("/checkout", async (req, res) => {
         // Send the session URL as the response
         res.json({ url: session.url });
 
-    } catch(error) {
+    } catch (error) {
         console.error('Error creating Stripe session:', error);
         res.status(500).json({ error: error.message });
     }
 });
 
-app.get("*",(req, res) => {
+app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
 })
 
