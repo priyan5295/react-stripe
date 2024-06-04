@@ -17,13 +17,26 @@ const stripe = stripeModule('sk_test_51PMQzE03DZVnzjSRtSxkdtdRcpMYFGqyz4eXcuUklo
 
 const __dirname = path.resolve()
 
+const successDir = path.join(__dirname, 'frontend/dist/success')
+const cancelDir = path.join(__dirname, 'frontend/dist/cancel')
+
 const app = express();
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
+
 console.log({__dirname})
+
 app.use(express.static(path.join(__dirname, 'frontend/dist'))).on('error', (err) => {
     console.error('Error serving static files:', err);
+});
+
+app.get('/success', (req, res) => {
+    res.sendFile(path.join(successDir, 'index.html'));
+});
+
+app.get('/cancel', (req, res) => {
+    res.sendFile(path.join(cancelDir, 'index.html'));
 });
 
 // For demonstration purposes, you can also use GET for testing.
@@ -77,7 +90,6 @@ app.post("/checkout", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
 
 // Start the server
 const PORT = process.env.PORT || 4000;
