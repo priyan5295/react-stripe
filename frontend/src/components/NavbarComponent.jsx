@@ -3,16 +3,20 @@ import {Button, Container, Navbar, Modal, Image} from 'react-bootstrap'
 import { CartContent } from '../CartContent'
 import CartProduct from './CartProduct'
 import NoItemImage from '../assets/empty-cart.svg'
+import { useNavigate } from 'react-router-dom'
+import Success from '../pages/Success'
 
 const NavbarComponent = () => {
 
-  const [currentPage, setCurrentPage] = useState('Cart');
+  const [purchaseSuccess, setPurchaseSuccess] = useState(false)
 
   const cart = useContext(CartContent)
 
   const[show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
+
+  const navigate = useNavigate()
 
   const handlePurchase = async () => {
     try {
@@ -33,6 +37,8 @@ const NavbarComponent = () => {
       })
   
       if (!response.ok) {
+        setPurchaseSuccess(true)
+        navigate('/success');
         const contentType = response.headers.get('Content-Type');
         if (contentType && contentType.includes('application/json')) {
             const errorData = await response.json();
@@ -82,9 +88,15 @@ const NavbarComponent = () => {
           ))}
             <h1>Total : ${cart.getTotalCost().toFixed(2)}</h1>
 
-            <Button variant='success' onClick={handlePurchase}>
+           { purchaseSuccess ? (
+              <Success />
+           ) : (
+                <Button variant='success' onClick={handlePurchase}>
                 Purchase Items!
-            </Button>
+                </Button>
+           )
+
+           }
 
           </>
           :
