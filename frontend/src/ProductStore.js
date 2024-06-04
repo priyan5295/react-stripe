@@ -21,24 +21,28 @@ const productsArray = [
         id: "price_1PMSk203DZVnzjSRtMeUDGsn",
         title: "Bluetooth Speaker",
         price: 89.99,
+        currency: "USD",
         image: terrain
     },
     {
         id: "price_1PMSpH03DZVnzjSRLk9AWqag",
         title: "Noise Headpones",
         price: 229.99,
+        currency: "USD",
         image: crusher
     },
     {
         id: "price_1PMSr103DZVnzjSRs5vEcq5J",
         title: "Push Earbuds",
         price: 63.99,
+        currency: "USD",
         image: earbuds
     },
     {
         id: "price_1PMSra03DZVnzjSRGZF3luOf",
         title: "Sun Glasses",
         price: 5.98,
+        currency: "USD",
         image: sunglass
 
     },
