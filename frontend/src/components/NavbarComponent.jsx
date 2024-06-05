@@ -3,6 +3,7 @@ import {Button, Container, Navbar, Modal, Image} from 'react-bootstrap'
 import { CartContent } from '../CartContent'
 import CartProduct from './CartProduct'
 import NoItemImage from '../assets/empty-cart.svg'
+import { Link } from 'react-router-dom'
 
 const NavbarComponent = () => {
 
@@ -67,8 +68,10 @@ const NavbarComponent = () => {
   return (
     <>
     <Navbar>
-        <Navbar.Brand href="https://react-stripe.onrender.com/" className='fw-bold fs-3'>
+        <Navbar.Brand>
+          <Link to='/' className='text-decoration-none fw-bold fs-3'>
           Priyan
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className='justify-content-end'>
