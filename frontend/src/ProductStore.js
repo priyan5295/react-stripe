@@ -17,16 +17,16 @@ import sunglass from './assets/sunglasses.png'
 
 
 // Conversion rate (example: 1 EUR = 1.18 USD)
-const conversionRateEURToUSD = 1.18;
+// const conversionRateEURToUSD = 1.18;
 
 // Function to convert price from EUR to USD
-const convertPriceToUSD = (product) => {
-    if (product.currency === "EUR") {
-        product.price = (product.price * conversionRateEURToUSD).toFixed(2);
-        product.currency = "USD";
-    }
-    return product;
-};
+// const convertPriceToUSD = (product) => {
+//     if (product.currency === "EUR") {
+//         product.price = (product.price * conversionRateEURToUSD).toFixed(2);
+//         product.currency = "USD";
+//     }
+//     return product;
+// };
 
 const productsArray = [
     {
@@ -69,7 +69,7 @@ function getProductData(id) {
     }
 
     // Convert price to USD if the currency is EUR
-    productData = convertPriceToUSD(productData);
+    // productData = convertPriceToUSD(productData);
 
     return productData
 }

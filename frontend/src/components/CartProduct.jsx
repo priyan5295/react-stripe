@@ -10,9 +10,9 @@ const CartProduct = (props) => {
     const quantity = props.quantity
     const productData = getProductData(id)
 
-    if (!productData) {
-      return <p>Product not found</p>;
-  }
+  //   if (!productData) {
+  //     return <p>Product not found</p>;
+  // }
 
   return (
     <div>

@@ -23,7 +23,8 @@ const NavbarComponent = () => {
         currency: item.currency ?? 'USD'
     }));
 
-    console.log('Formatted Cart items:', JSON.stringify(formattedItems, null, 2))
+    //when purchase items click the cart detials shown 
+    // console.log('Formatted Cart items:', JSON.stringify(formattedItems, null, 2))
 
     // Check if all items have the same currency
     const uniqueCurrencies = new Set(formattedItems.map(item => item.currency))
