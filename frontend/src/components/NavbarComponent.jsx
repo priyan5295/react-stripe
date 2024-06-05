@@ -9,12 +9,12 @@ const NavbarComponent = () => {
   const cart = useContext(CartContent)
 
   const[show, setShow] = useState(false)
+
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
 
   const handlePurchase = async () => {
     try {
-
       // Ensure all items have a price and set the currency to USD if not specified
       const formattedItems = cart.items.map(item => ({
         id: item.id,
@@ -23,12 +23,12 @@ const NavbarComponent = () => {
         currency: item.currency ?? 'USD'
     }));
 
-    console.log('Formatted Cart items:', JSON.stringify(formattedItems, null, 2));
+    console.log('Formatted Cart items:', JSON.stringify(formattedItems, null, 2))
 
     // Check if all items have the same currency
-    const uniqueCurrencies = new Set(formattedItems.map(item => item.currency));
+    const uniqueCurrencies = new Set(formattedItems.map(item => item.currency))
     if(uniqueCurrencies.size > 1) {
-      console.error('Currency mismatch detected:', Array.from(uniqueCurrencies));
+      console.error('Currency mismatch detected:', Array.from(uniqueCurrencies))
       throw new Error('All items must have the same currency')
     }
 

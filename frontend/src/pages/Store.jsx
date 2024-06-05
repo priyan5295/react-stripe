@@ -6,7 +6,6 @@ import Footer from '../components/Footer'
 
 const Store = () => {
     return (
-
         <div>
             <h1 align='center'>Welcome to my store</h1>
             {/* map parthensisnmeasns regular experrion us return a jsx element immmeditely every single product of product array */}
