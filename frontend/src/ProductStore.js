@@ -30,7 +30,7 @@ const convertPriceToUSD = (product) => {
 
 const productsArray = [
     {
-        id: "price_1PMSk203DZVnzjSRtMeUDGsn",
+        id: "price_1POCry03DZVnzjSREuYfVfJh",
         title: "Bluetooth Speaker",
         price: 89.99,
         currency: "USD",
