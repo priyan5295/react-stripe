@@ -19,8 +19,8 @@ const NavbarComponent = () => {
       const formattedItems = cart.items.map(item => ({
         id: item.id,
         quantity: item.quantity,
-        price: item.price || 0,
-        currency: item.currency || 'USD'
+        price: item.price ?? 0,
+        currency: item.currency ?? 'USD'
     }));
 
     console.log('Formatted Cart items:', JSON.stringify(formattedItems, null, 2));
