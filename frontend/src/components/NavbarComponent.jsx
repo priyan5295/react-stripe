@@ -68,8 +68,8 @@ const NavbarComponent = () => {
   return (
     <>
     <Navbar>
-        <Navbar.Brand>
-          <Link to='/' className='text-decoration-none fw-bold fs-3'>
+        <Navbar.Brand className='fw-bold fs-3'>
+          <Link to='/' className='text-decoration-none'>
           Priyan
           </Link>
         </Navbar.Brand>
